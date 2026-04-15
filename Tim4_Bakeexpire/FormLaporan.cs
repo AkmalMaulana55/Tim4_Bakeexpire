@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace Tim4_Bakeexpire
 {
-    public partial class Form1: Form
+    public partial class FormLaporan: Form
     {
-        public Form1()
+        public FormLaporan()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
