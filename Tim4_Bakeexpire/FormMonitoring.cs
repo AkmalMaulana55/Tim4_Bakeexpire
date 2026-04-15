@@ -62,5 +62,34 @@ namespace Tim4_Bakeexpire
 
             dataGridView1.DataSource = dt;
         }
+
+        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            SqlConnection conn = Koneksi.GetConnection();
+            conn.Open();
+
+            string query;
+
+            if (cmbStatus.Text == "Semua")
+                query = "SELECT * FROM Stok";
+            else
+                query = "SELECT * FROM Stok WHERE Status=@status";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+
+            if (cmbStatus.Text != "Semua")
+                cmd.Parameters.AddWithValue("@status", cmbStatus.Text);
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            dataGridView1.DataSource = dt;
+        }
     }
 }
