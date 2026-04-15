@@ -60,7 +60,7 @@
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(75, 23);
             this.btnFilter.TabIndex = 2;
-            this.btnFilter.Text = "button1";
+            this.btnFilter.Text = "Filter";
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
@@ -70,7 +70,7 @@
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnRefresh.TabIndex = 3;
-            this.btnRefresh.Text = "button2";
+            this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
@@ -80,7 +80,7 @@
             this.btnLaporan.Name = "btnLaporan";
             this.btnLaporan.Size = new System.Drawing.Size(75, 23);
             this.btnLaporan.TabIndex = 4;
-            this.btnLaporan.Text = "button3";
+            this.btnLaporan.Text = "Laporan";
             this.btnLaporan.UseVisualStyleBackColor = true;
             this.btnLaporan.Click += new System.EventHandler(this.btnLaporan_Click);
             // 

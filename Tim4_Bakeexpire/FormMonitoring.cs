@@ -31,17 +31,33 @@ namespace Tim4_Bakeexpire
 
         void TampilData()
         {
-            SqlConnection conn = Koneksi.GetConnection();
-            conn.Open();
+            try
+            {
+                using (SqlConnection conn = Koneksi.GetConnection())
+                {
+                    conn.Open();
 
-            string query = "SELECT Bahan.Nama_bahan, Stok.Jumlah_bahan, Stok.Tanggal_masuk, Stok.Tanggal_kadaluwarsa, Stok.Status " +
-                           "FROM Stok JOIN Bahan ON Stok.Id_bahan = Bahan.Id_bahan";
+                    string query = @"SELECT 
+                                Bahan.Nama_bahan, 
+                                stock.Jumlah_bahan, 
+                                stock.Tanggal_masuk, 
+                                stock.Tanggal_kadaluwarsa, 
+                                stock.Status 
+                             FROM stock
+                             JOIN Bahan ON stock.Id_bahan = Bahan.Id_bahan";
 
-            SqlDataAdapter da = new SqlDataAdapter(query, conn);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
+                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
 
-            dataGridView1.DataSource = dt;
+                    da.Fill(dt);
+
+                    dataGridView1.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -49,8 +65,8 @@ namespace Tim4_Bakeexpire
             SqlConnection conn = Koneksi.GetConnection();
             conn.Open();
 
-            string query = "SELECT Bahan.Nama_bahan, Stok.* FROM Stok " +
-                           "JOIN Bahan ON Stok.Id_bahan = Bahan.Id_bahan " +
+            string query = "SELECT Bahan.Nama_bahan, stock.* FROM stock " +
+                           "JOIN Bahan ON stock.Id_bahan = Bahan.Id_bahan " +
                            "WHERE Nama_bahan LIKE @search";
 
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -76,9 +92,9 @@ namespace Tim4_Bakeexpire
             string query;
 
             if (cmbStatus.Text == "Semua")
-                query = "SELECT * FROM Stok";
+                query = "SELECT * FROM stock";
             else
-                query = "SELECT * FROM Stok WHERE Status=@status";
+                query = "SELECT * FROM stock WHERE Status=@status";
 
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -111,6 +127,11 @@ namespace Tim4_Bakeexpire
                 dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
             else if (status == "Hampir Kadaluwarsa")
                 dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
     }
 }

@@ -31,28 +31,40 @@ namespace Tim4_Bakeexpire
                 return;
             }
 
-            SqlConnection conn = Koneksi.GetConnection();
-            conn.Open();
-
-            string query = "SELECT * FROM Users WHERE Email=@email AND Password=@pass";
-            SqlCommand cmd = new SqlCommand(query, conn);
-
-            cmd.Parameters.AddWithValue("@email", txtEmail.Text);
-            cmd.Parameters.AddWithValue("@pass", txtPassword.Text);
-
-            SqlDataReader rd = cmd.ExecuteReader();
-
-            if (rd.Read())
+            try
             {
-                MessageBox.Show("Login berhasil");
+                using (SqlConnection conn = Koneksi.GetConnection())
+                {
+                    conn.Open();
 
-                FormMonitoring f = new FormMonitoring();
-                f.Show();
-                this.Hide();
+                    string query = "SELECT * FROM Users WHERE Email=@email AND Password=@pass";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    cmd.Parameters.AddWithValue("@email", txtEmail.Text);
+                    cmd.Parameters.AddWithValue("@pass", txtPassword.Text);
+
+                    SqlDataReader rd = cmd.ExecuteReader();
+
+                    if (rd.Read())
+                    {
+                        string nama = rd["Nama_pengguna"].ToString();
+
+                        MessageBox.Show("Login berhasil! Selamat datang " + nama);
+
+                        FormMonitoring f = new FormMonitoring();
+                        f.Show();
+
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Email atau Password salah!");
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Login gagal");
+                MessageBox.Show("Terjadi error: " + ex.Message);
             }
         }
     }
