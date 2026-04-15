@@ -31,8 +31,8 @@
             this.cmbFilter = new System.Windows.Forms.ComboBox();
             this.btnFilter = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnLaporan = new System.Windows.Forms.Button();
             this.dataGridViewLaporan = new System.Windows.Forms.DataGridView();
+            this.btnInput = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLaporan)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,15 +64,6 @@
             this.btnRefresh.Text = "button2";
             this.btnRefresh.UseVisualStyleBackColor = true;
             // 
-            // btnLaporan
-            // 
-            this.btnLaporan.Location = new System.Drawing.Point(331, 107);
-            this.btnLaporan.Name = "btnLaporan";
-            this.btnLaporan.Size = new System.Drawing.Size(75, 23);
-            this.btnLaporan.TabIndex = 3;
-            this.btnLaporan.Text = "button3";
-            this.btnLaporan.UseVisualStyleBackColor = true;
-            // 
             // dataGridViewLaporan
             // 
             this.dataGridViewLaporan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -83,13 +74,23 @@
             this.dataGridViewLaporan.Size = new System.Drawing.Size(237, 150);
             this.dataGridViewLaporan.TabIndex = 4;
             // 
+            // btnInput
+            // 
+            this.btnInput.Location = new System.Drawing.Point(331, 107);
+            this.btnInput.Name = "btnInput";
+            this.btnInput.Size = new System.Drawing.Size(75, 23);
+            this.btnInput.TabIndex = 5;
+            this.btnInput.Text = "button1";
+            this.btnInput.UseVisualStyleBackColor = true;
+            this.btnInput.Click += new System.EventHandler(this.btnInput_Click);
+            // 
             // FormLaporan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnInput);
             this.Controls.Add(this.dataGridViewLaporan);
-            this.Controls.Add(this.btnLaporan);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnFilter);
             this.Controls.Add(this.cmbFilter);
@@ -106,7 +107,7 @@
         private System.Windows.Forms.ComboBox cmbFilter;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.Button btnLaporan;
         private System.Windows.Forms.DataGridView dataGridViewLaporan;
+        private System.Windows.Forms.Button btnInput;
     }
 }

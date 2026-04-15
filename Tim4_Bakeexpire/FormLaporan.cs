@@ -75,5 +75,11 @@ namespace Tim4_Bakeexpire
 
             dataGridViewLaporan.DataSource = dt;
         }
+
+        private void btnInput_Click(object sender, EventArgs e)
+        {
+            FormInputLaporan f = new FormInputLaporan();
+            f.ShowDialog();
+        }
     }
 }
