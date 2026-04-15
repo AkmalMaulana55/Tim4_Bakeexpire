@@ -43,5 +43,24 @@ namespace Tim4_Bakeexpire
 
             dataGridView1.DataSource = dt;
         }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            SqlConnection conn = Koneksi.GetConnection();
+            conn.Open();
+
+            string query = "SELECT Bahan.Nama_bahan, Stok.* FROM Stok " +
+                           "JOIN Bahan ON Stok.Id_bahan = Bahan.Id_bahan " +
+                           "WHERE Nama_bahan LIKE @search";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@search", "%" + txtSearch.Text + "%");
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            dataGridView1.DataSource = dt;
+        }
     }
 }
