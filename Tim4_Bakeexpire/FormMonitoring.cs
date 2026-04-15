@@ -102,5 +102,15 @@ namespace Tim4_Bakeexpire
             FormLaporan f = new FormLaporan();
             f.Show();
         }
+
+        private void dataGridView1_RowPrePaint(object sender, DataGridViewCellEventArgs e)
+        {
+            string status = dataGridView1.Rows[e.RowIndex].Cells["Status"].Value.ToString();
+
+            if (status == "Kadaluwarsa")
+                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
+            else if (status == "Hampir Kadaluwarsa")
+                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
+        }
     }
 }
