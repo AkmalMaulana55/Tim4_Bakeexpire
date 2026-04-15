@@ -63,6 +63,7 @@
             this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "button2";
             this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // dataGridViewLaporan
             // 

@@ -81,5 +81,10 @@ namespace Tim4_Bakeexpire
             FormInputLaporan f = new FormInputLaporan();
             f.ShowDialog();
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            TampilLaporan();
+        }
     }
 }
