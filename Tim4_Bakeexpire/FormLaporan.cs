@@ -33,10 +33,10 @@ namespace Tim4_Bakeexpire
             SqlConnection conn = Koneksi.GetConnection();
             conn.Open();
 
-            string query = "SELECT Bahan.Nama_bahan, Stok.Status, Laporan.Tindakan, Laporan.Keterangan, Laporan.Tanggal_laporan " +
+            string query = "SELECT Bahan.Nama_bahan, stock.Status, Laporan.Tindakan, Laporan.Keterangan, Laporan.Tanggal_laporan " +
                            "FROM Laporan " +
-                           "JOIN Stok ON Laporan.Id_stok = Stok.Id_stok " +
-                           "JOIN Bahan ON Stok.Id_bahan = Bahan.Id_bahan";
+                           "JOIN stock ON Laporan.Id_stok = stock.Id_stok " +
+                           "JOIN Bahan ON stock.Id_bahan = Bahan.Id_bahan";
 
             SqlDataAdapter da = new SqlDataAdapter(query, conn);
             DataTable dt = new DataTable();
