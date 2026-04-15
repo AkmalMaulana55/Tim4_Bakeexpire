@@ -93,6 +93,7 @@
             this.Controls.Add(this.cmbFilter);
             this.Name = "FormLaporan";
             this.Text = "FormLaporan";
+            this.Load += new System.EventHandler(this.FormLaporan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLaporan)).EndInit();
             this.ResumeLayout(false);
 

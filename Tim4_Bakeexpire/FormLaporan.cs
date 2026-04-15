@@ -16,5 +16,15 @@ namespace Tim4_Bakeexpire
         {
             InitializeComponent();
         }
+
+        private void FormLaporan_Load(object sender, EventArgs e)
+        {
+            cmbFilter.Items.Add("Semua");
+            cmbFilter.Items.Add("Hampir Kadaluwarsa");
+            cmbFilter.Items.Add("Kadaluwarsa");
+            cmbFilter.SelectedIndex = 0;
+
+            TampilLaporan();
+        }
     }
 }
