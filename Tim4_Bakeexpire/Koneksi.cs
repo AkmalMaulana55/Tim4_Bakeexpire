@@ -5,7 +5,7 @@ namespace Tim4_Bakeexpire
 {
     class Koneksi
     {
-        public SqlConnection GetConnection()
+        public static SqlConnection GetConnection()
         {
             return new SqlConnection("Data Source=MYBOOKHYPE\\AKMALSQL;Initial Catalog=db_bakeexpire;Integrated Security=True");
         }
