@@ -91,5 +91,10 @@ namespace Tim4_Bakeexpire
 
             dataGridView1.DataSource = dt;
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            TampilData();
+        }
     }
 }
