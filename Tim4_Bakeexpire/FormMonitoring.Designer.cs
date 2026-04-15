@@ -82,6 +82,7 @@
             this.btnLaporan.TabIndex = 4;
             this.btnLaporan.Text = "button3";
             this.btnLaporan.UseVisualStyleBackColor = true;
+            this.btnLaporan.Click += new System.EventHandler(this.btnLaporan_Click);
             // 
             // dataGridView1
             // 

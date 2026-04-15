@@ -96,5 +96,11 @@ namespace Tim4_Bakeexpire
         {
             TampilData();
         }
+
+        private void btnLaporan_Click(object sender, EventArgs e)
+        {
+            FormLaporan f = new FormLaporan();
+            f.Show();
+        }
     }
 }
