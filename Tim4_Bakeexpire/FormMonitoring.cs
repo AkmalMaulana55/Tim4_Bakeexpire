@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,32 @@ namespace Tim4_Bakeexpire
         public FormMonitoring()
         {
             InitializeComponent();
+        }
+
+        private void FormMonitoring_Load(object sender, EventArgs e)
+        {
+            cmbStatus.Items.Add("Semua");
+            cmbStatus.Items.Add("Aman");
+            cmbStatus.Items.Add("Hampir Kadaluwarsa");
+            cmbStatus.Items.Add("Kadaluwarsa");
+            cmbStatus.SelectedIndex = 0;
+
+            TampilData();
+        }
+
+        void TampilData()
+        {
+            SqlConnection conn = Koneksi.GetConnection();
+            conn.Open();
+
+            string query = "SELECT Bahan.Nama_bahan, Stok.Jumlah_bahan, Stok.Tanggal_masuk, Stok.Tanggal_kadaluwarsa, Stok.Status " +
+                           "FROM Stok JOIN Bahan ON Stok.Id_bahan = Bahan.Id_bahan";
+
+            SqlDataAdapter da = new SqlDataAdapter(query, conn);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            dataGridView1.DataSource = dt;
         }
     }
 }
