@@ -65,6 +65,7 @@
             this.btnSimpan.TabIndex = 3;
             this.btnSimpan.Text = "button1";
             this.btnSimpan.UseVisualStyleBackColor = true;
+            this.btnSimpan.Click += new System.EventHandler(this.btnSimpan_Click);
             // 
             // FormInputLaporan
             // 
