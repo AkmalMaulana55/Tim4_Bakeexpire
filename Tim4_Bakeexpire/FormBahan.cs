@@ -122,8 +122,8 @@ namespace Tim4_Bakeexpire
                 {
                     SqlConnection conn = Koneksi.GetConnection();
                     conn.Open();
-                    string query = "DELETE FROM Bahan WHERE Id_bahan=@id";
-                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand("sp_hapus_bahan", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@id", selectedId);
                     cmd.ExecuteNonQuery();
                     conn.Close();
