@@ -11,11 +11,9 @@ using System.Windows.Forms;
 
 namespace Tim4_Bakeexpire
 {
-    public partial class FormBahan: Form
+    public partial class FormBahan : Form
     {
         int selectedId = 0;
-
-        BindingSource bs = new BindingSource();
 
         public FormBahan()
         {
@@ -25,7 +23,6 @@ namespace Tim4_Bakeexpire
         private void FormBahan_Load(object sender, EventArgs e)
         {
             LoadBahan();
-            bindingNavigator1.BindingSource = bs;
         }
 
         private void LoadBahan()
@@ -34,11 +31,10 @@ namespace Tim4_Bakeexpire
             {
                 SqlConnection conn = Koneksi.GetConnection();
                 conn.Open();
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM vw_bahan",conn);
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Bahan", conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                bs.DataSource = dt;
-                dataGridView1.DataSource = bs;
+                dataGridView1.DataSource = dt;
                 conn.Close();
             }
             catch (Exception ex)
@@ -59,8 +55,8 @@ namespace Tim4_Bakeexpire
             {
                 SqlConnection conn = Koneksi.GetConnection();
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("sp_tambah_bahan",conn);
-                cmd.CommandType =CommandType.StoredProcedure;
+                string query = "INSERT INTO Bahan (Nama_bahan, Kategori, Satuan) VALUES (@nama, @kat, @sat)";
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@nama", txtNama.Text);
                 cmd.Parameters.AddWithValue("@kat", txtKategori.Text);
                 cmd.Parameters.AddWithValue("@sat", txtSatuan.Text);
@@ -89,8 +85,8 @@ namespace Tim4_Bakeexpire
             {
                 SqlConnection conn = Koneksi.GetConnection();
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("sp_edit_bahan",conn);
-                cmd.CommandType =CommandType.StoredProcedure;
+                string query = "UPDATE Bahan SET Nama_bahan=@nama, Kategori=@kat, Satuan=@sat WHERE Id_bahan=@id";
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@nama", txtNama.Text);
                 cmd.Parameters.AddWithValue("@kat", txtKategori.Text);
                 cmd.Parameters.AddWithValue("@sat", txtSatuan.Text);
@@ -123,8 +119,8 @@ namespace Tim4_Bakeexpire
                 {
                     SqlConnection conn = Koneksi.GetConnection();
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("sp_hapus_bahan",conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    string query = "DELETE FROM Bahan WHERE Id_bahan=@id";
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id", selectedId);
                     cmd.ExecuteNonQuery();
                     conn.Close();
@@ -165,31 +161,6 @@ namespace Tim4_Bakeexpire
             }
         }
 
-        private void btnCari_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                SqlConnection conn = Koneksi.GetConnection();
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("sp_search_bahan", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@keyword", txtCari.Text);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                bs.DataSource = dt;
-                dataGridView1.DataSource = bs;
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
 
-        private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
-        {
-
-        }
     }
 }

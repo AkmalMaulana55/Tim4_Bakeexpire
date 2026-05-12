@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Tim4_Bakeexpire
 {
-    public partial class FormLaporan: Form
+    public partial class FormLaporan : Form
     {
         int _userId;
         int selectedIdStok = 0;
@@ -62,7 +62,13 @@ namespace Tim4_Bakeexpire
             {
                 SqlConnection conn = Koneksi.GetConnection();
                 conn.Open();
-                string query = "SELECT * FROM vw_laporan";
+                string query = @"SELECT l.Id_laporan, b.Nama_bahan, u.Nama as Petugas,
+                                    l.Tindakan, l.Keterangan, l.Tanggal_laporan
+                             FROM Laporan l
+                             JOIN Stok s ON l.Id_stok = s.Id_stok
+                             JOIN Bahan b ON s.Id_bahan = b.Id_bahan
+                             JOIN Users u ON l.Id_user = u.Id_user
+                             ORDER BY l.Tanggal_laporan DESC";
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -95,8 +101,9 @@ namespace Tim4_Bakeexpire
             {
                 SqlConnection conn = Koneksi.GetConnection();
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("sp_tambah_laporan",conn);
-                cmd.CommandType = CommandType.StoredProcedure;
+                string query = @"INSERT INTO Laporan (Id_stok, Id_user, Tindakan, Keterangan, Tanggal_laporan)
+                             VALUES (@idstok, @iduser, @tindakan, @ket, @tgl)";
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@idstok", selectedIdStok);
                 cmd.Parameters.AddWithValue("@iduser", _userId);
                 cmd.Parameters.AddWithValue("@tindakan", cmbTindakan.SelectedItem.ToString());
@@ -139,8 +146,8 @@ namespace Tim4_Bakeexpire
                 {
                     SqlConnection conn = Koneksi.GetConnection();
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("sp_tambah_laporan",conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    string query = "DELETE FROM Laporan WHERE Id_laporan = @id";
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id", idLaporan);
                     cmd.ExecuteNonQuery();
                     conn.Close();

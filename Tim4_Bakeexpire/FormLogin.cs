@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Tim4_Bakeexpire
 {
-    public partial class FormLogin: Form
+    public partial class FormLogin : Form
     {
         public FormLogin()
         {
@@ -39,15 +39,10 @@ namespace Tim4_Bakeexpire
                 SqlConnection conn = Koneksi.GetConnection();
                 conn.Open();
 
-                string query =
-                    "SELECT * FROM Users WHERE Email='"
-                    + email +
-                    "' AND Password='"
-                    + pass +
-                    "'";
-
-                SqlCommand cmd =
-                    new SqlCommand(query, conn);
+                string query ="SELECT * FROM Users WHERE Email='"+ email +"' AND Password='" + pass +"'";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@pass", pass);
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
