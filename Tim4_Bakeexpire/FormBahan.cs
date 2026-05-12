@@ -25,7 +25,7 @@ namespace Tim4_Bakeexpire
         private void FormBahan_Load(object sender, EventArgs e)
         {
             LoadBahan();
-            BindingSource bs = new BindingSource();
+            bindingNavigator1.BindingSource = bs;
         }
 
         private void LoadBahan()
@@ -37,7 +37,8 @@ namespace Tim4_Bakeexpire
                 SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM vw_bahan", conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                dataGridView1.DataSource = dt;
+                bs.DataSource = dt;
+                dataGridView1.DataSource = bs;
                 conn.Close();
             }
             catch (Exception ex)
@@ -184,6 +185,11 @@ namespace Tim4_Bakeexpire
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
+        {
+
         }
     }
 }
