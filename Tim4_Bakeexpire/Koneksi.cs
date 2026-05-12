@@ -7,7 +7,7 @@ namespace Tim4_Bakeexpire
     {
         public static SqlConnection GetConnection()
         {
-            return new SqlConnection("Data Source=MYBOOKHYPE\\AKMALSQL;Initial Catalog=db_bakeexpire;Integrated Security=True");
+            return new SqlConnection("Data Source=MYBOOKHYPE\\AKMALSQL;Initial Catalog=BakeExpireDB;Integrated Security=True");
         }
     }
 }

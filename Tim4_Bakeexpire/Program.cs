@@ -16,7 +16,7 @@ namespace Tim4_Bakeexpire
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormLaporan());
+            Application.Run(new FormLogin());
         }
     }
 }
