@@ -34,7 +34,7 @@ namespace Tim4_Bakeexpire
             {
                 SqlConnection conn = Koneksi.GetConnection();
                 conn.Open();
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Bahan", conn);
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM vw_bahan", conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 dataGridView1.DataSource = dt;
