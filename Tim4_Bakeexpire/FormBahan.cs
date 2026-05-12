@@ -15,6 +15,8 @@ namespace Tim4_Bakeexpire
     {
         int selectedId = 0;
 
+        BindingSource bs = new BindingSource();
+
         public FormBahan()
         {
             InitializeComponent();
@@ -23,6 +25,7 @@ namespace Tim4_Bakeexpire
         private void FormBahan_Load(object sender, EventArgs e)
         {
             LoadBahan();
+            BindingSource bs = new BindingSource();
         }
 
         private void LoadBahan()
