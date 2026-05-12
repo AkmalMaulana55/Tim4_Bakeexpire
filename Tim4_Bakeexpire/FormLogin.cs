@@ -39,10 +39,15 @@ namespace Tim4_Bakeexpire
                 SqlConnection conn = Koneksi.GetConnection();
                 conn.Open();
 
-                string query = "SELECT * FROM Users WHERE Email=@email AND Password=@pass";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@email", email);
-                cmd.Parameters.AddWithValue("@pass", pass);
+                string query =
+                    "SELECT * FROM Users WHERE Email='"
+                    + email +
+                    "' AND Password='"
+                    + pass +
+                    "'";
+
+                SqlCommand cmd =
+                    new SqlCommand(query, conn);
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
