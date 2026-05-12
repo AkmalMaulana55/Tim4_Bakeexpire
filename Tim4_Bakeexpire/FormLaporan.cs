@@ -62,13 +62,7 @@ namespace Tim4_Bakeexpire
             {
                 SqlConnection conn = Koneksi.GetConnection();
                 conn.Open();
-                string query = @"SELECT l.Id_laporan, b.Nama_bahan, u.Nama as Petugas,
-                                    l.Tindakan, l.Keterangan, l.Tanggal_laporan
-                             FROM Laporan l
-                             JOIN Stok s ON l.Id_stok = s.Id_stok
-                             JOIN Bahan b ON s.Id_bahan = b.Id_bahan
-                             JOIN Users u ON l.Id_user = u.Id_user
-                             ORDER BY l.Tanggal_laporan DESC";
+                string query = "SELECT * FROM vw_laporan";
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -101,9 +95,8 @@ namespace Tim4_Bakeexpire
             {
                 SqlConnection conn = Koneksi.GetConnection();
                 conn.Open();
-                string query = @"INSERT INTO Laporan (Id_stok, Id_user, Tindakan, Keterangan, Tanggal_laporan)
-                             VALUES (@idstok, @iduser, @tindakan, @ket, @tgl)";
-                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand("sp_tambah_laporan", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@idstok", selectedIdStok);
                 cmd.Parameters.AddWithValue("@iduser", _userId);
                 cmd.Parameters.AddWithValue("@tindakan", cmbTindakan.SelectedItem.ToString());
@@ -146,8 +139,8 @@ namespace Tim4_Bakeexpire
                 {
                     SqlConnection conn = Koneksi.GetConnection();
                     conn.Open();
-                    string query = "DELETE FROM Laporan WHERE Id_laporan = @id";
-                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand("sp_tambah_laporan", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@id", idLaporan);
                     cmd.ExecuteNonQuery();
                     conn.Close();
