@@ -161,6 +161,26 @@ namespace Tim4_Bakeexpire
             }
         }
 
-
+        private void btnCari_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SqlConnection conn = Koneksi.GetConnection();
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("sp_search_bahan", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@keyword", txtCari.Text);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                bs.DataSource = dt;
+                dataGridView1.DataSource = bs;
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
