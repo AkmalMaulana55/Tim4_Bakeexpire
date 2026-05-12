@@ -62,8 +62,8 @@ namespace Tim4_Bakeexpire
                 SqlCommand cmd = new SqlCommand("sp_tambah_bahan", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@nama", txtNama.Text);
-                cmd.Parameters.AddWithValue("@kat", txtKategori.Text);
-                cmd.Parameters.AddWithValue("@sat", txtSatuan.Text);
+                cmd.Parameters.AddWithValue("@kategori", txtKategori.Text);
+                cmd.Parameters.AddWithValue("@satuan", txtSatuan.Text);
                 cmd.ExecuteNonQuery();
                 conn.Close();
 
@@ -92,8 +92,8 @@ namespace Tim4_Bakeexpire
                 SqlCommand cmd = new SqlCommand("sp_edit_bahan", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@nama", txtNama.Text);
-                cmd.Parameters.AddWithValue("@kat", txtKategori.Text);
-                cmd.Parameters.AddWithValue("@sat", txtSatuan.Text);
+                cmd.Parameters.AddWithValue("@kategori", txtKategori.Text);
+                cmd.Parameters.AddWithValue("@satuan", txtSatuan.Text);
                 cmd.Parameters.AddWithValue("@id", selectedId);
                 cmd.ExecuteNonQuery();
                 conn.Close();

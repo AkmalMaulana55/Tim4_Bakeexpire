@@ -100,8 +100,8 @@ namespace Tim4_Bakeexpire
                 cmd.Parameters.AddWithValue("@idstok", selectedIdStok);
                 cmd.Parameters.AddWithValue("@iduser", _userId);
                 cmd.Parameters.AddWithValue("@tindakan", cmbTindakan.SelectedItem.ToString());
-                cmd.Parameters.AddWithValue("@ket", txtKeterangan.Text);
-                cmd.Parameters.AddWithValue("@tgl", DateTime.Today);
+                cmd.Parameters.AddWithValue("@keterangan", txtKeterangan.Text);
+                cmd.Parameters.AddWithValue("@tanggal", DateTime.Today);
                 cmd.ExecuteNonQuery();
                 conn.Close();
 
