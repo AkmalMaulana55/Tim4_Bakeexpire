@@ -16,6 +16,8 @@ namespace Tim4_Bakeexpire
         int _userId;
         int selectedId = 0;
 
+        BindingSource bs = new BindingSource();
+
         public FormStok(int userId)
         {
             InitializeComponent();
@@ -26,6 +28,7 @@ namespace Tim4_Bakeexpire
         {
             LoadComboBoxBahan();
             LoadStok();
+            bindingNavigator1.BindingSource = bs;
             dtpKadaluwarsa.ValueChanged += new EventHandler(dtpKadaluwarsa_ValueChanged);
         }
 
@@ -55,14 +58,12 @@ namespace Tim4_Bakeexpire
             {
                 SqlConnection conn = Koneksi.GetConnection();
                 conn.Open();
-                string query = @"SELECT s.Id_stok, b.Nama_bahan, s.Jumlah_bahan,
-                                    s.Tanggal_masuk, s.Tanggal_kadaluwarsa, s.Status
-                             FROM Stok s
-                             JOIN Bahan b ON s.Id_bahan = b.Id_bahan";
+                string query = "SELECT * FROM vw_stok";
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                dataGridView1.DataSource = dt;
+                bs.DataSource = dt;
+                dataGridView1.DataSource = bs;
                 conn.Close();
                 WarnaiStatus();
             }
@@ -116,9 +117,8 @@ namespace Tim4_Bakeexpire
             {
                 SqlConnection conn = Koneksi.GetConnection();
                 conn.Open();
-                string query = @"INSERT INTO Stok (Id_bahan, Id_user, Jumlah_bahan, Tanggal_masuk, Tanggal_kadaluwarsa, Status)
-                             VALUES (@idbahan, @iduser, @jumlah, @masuk, @kadaluwarsa, @status)";
-                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand("sp_tambah_stok", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@idbahan", cmbBahan.SelectedValue);
                 cmd.Parameters.AddWithValue("@iduser", _userId);
                 cmd.Parameters.AddWithValue("@jumlah", Convert.ToDouble(txtJumlah.Text));
@@ -152,10 +152,8 @@ namespace Tim4_Bakeexpire
             {
                 SqlConnection conn = Koneksi.GetConnection();
                 conn.Open();
-                string query = @"UPDATE Stok SET Id_bahan=@idbahan, Jumlah_bahan=@jumlah,
-                             Tanggal_masuk=@masuk, Tanggal_kadaluwarsa=@kadaluwarsa, Status=@status
-                             WHERE Id_stok=@id";
-                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand("sp_edit_stok", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@idbahan", cmbBahan.SelectedValue);
                 cmd.Parameters.AddWithValue("@jumlah", Convert.ToDouble(txtJumlah.Text));
                 cmd.Parameters.AddWithValue("@masuk", dtpMasuk.Value.Date);
@@ -190,8 +188,8 @@ namespace Tim4_Bakeexpire
                 {
                     SqlConnection conn = Koneksi.GetConnection();
                     conn.Open();
-                    string query = "DELETE FROM Stok WHERE Id_stok=@id";
-                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand("sp_hapus_stok", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@id", selectedId);
                     cmd.ExecuteNonQuery();
                     conn.Close();
