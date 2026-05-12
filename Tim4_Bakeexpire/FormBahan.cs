@@ -88,8 +88,8 @@ namespace Tim4_Bakeexpire
             {
                 SqlConnection conn = Koneksi.GetConnection();
                 conn.Open();
-                string query = "UPDATE Bahan SET Nama_bahan=@nama, Kategori=@kat, Satuan=@sat WHERE Id_bahan=@id";
-                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand("sp_edit_bahan", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@nama", txtNama.Text);
                 cmd.Parameters.AddWithValue("@kat", txtKategori.Text);
                 cmd.Parameters.AddWithValue("@sat", txtSatuan.Text);
