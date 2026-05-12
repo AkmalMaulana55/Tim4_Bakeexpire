@@ -58,8 +58,8 @@ namespace Tim4_Bakeexpire
             {
                 SqlConnection conn = Koneksi.GetConnection();
                 conn.Open();
-                string query = "INSERT INTO Bahan (Nama_bahan, Kategori, Satuan) VALUES (@nama, @kat, @sat)";
-                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand("sp_tambah_bahan", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@nama", txtNama.Text);
                 cmd.Parameters.AddWithValue("@kat", txtKategori.Text);
                 cmd.Parameters.AddWithValue("@sat", txtSatuan.Text);
