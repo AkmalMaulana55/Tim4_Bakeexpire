@@ -118,13 +118,13 @@ namespace Tim4_Bakeexpire
 
         private void btnHapusLaporan_Click(object sender, EventArgs e)
         {
-            if (dgvLaporan.SelectedRows.Count == 0)
+            if (dgvLaporan.CurrentRow == null)
             {
                 MessageBox.Show("Pilih laporan yang ingin dihapus dulu!");
                 return;
             }
 
-            int idLaporan = Convert.ToInt32(dgvLaporan.SelectedRows[0].Cells["Id_laporan"].Value);
+            int idLaporan = Convert.ToInt32(dgvLaporan.CurrentRow.Cells["Id_laporan"].Value);
 
             DialogResult confirm = MessageBox.Show(
                 "Yakin ingin menghapus laporan ini?",
@@ -139,7 +139,7 @@ namespace Tim4_Bakeexpire
                 {
                     SqlConnection conn = Koneksi.GetConnection();
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("sp_tambah_laporan", conn);
+                    SqlCommand cmd = new SqlCommand("sp_hapus_laporan", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@id", idLaporan);
                     cmd.ExecuteNonQuery();
@@ -153,6 +153,13 @@ namespace Tim4_Bakeexpire
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
+        }
+
+        private void btnCetak_Click(object sender, EventArgs e)
+        {
+            FormCetakLaporan frm2 = new FormCetakLaporan();
+            frm2.Show();
+            this.Hide();
         }
     }
 }

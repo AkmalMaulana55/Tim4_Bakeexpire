@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Tim4_Bakeexpire
 {
@@ -34,6 +35,7 @@ namespace Tim4_Bakeexpire
 
             UpdateStatus();
             LoadRingkasan();
+            LoadChart();
         }
 
         private void UpdateStatus()
@@ -99,6 +101,55 @@ namespace Tim4_Bakeexpire
         {
             this.Close();
             new FormLogin().Show();
+        }
+
+        private void LoadChart()
+        {
+            try
+            {
+                SqlConnection conn = Koneksi.GetConnection();
+                conn.Open();
+
+                int jumlahAman = Convert.ToInt32(new SqlCommand("SELECT COUNT(*) FROM Stok WHERE Status='Aman'", conn).ExecuteScalar());
+                int jumlahHampir = Convert.ToInt32(new SqlCommand("SELECT COUNT(*) FROM Stok WHERE Status='Hampir Kadaluwarsa'", conn).ExecuteScalar());
+                int jumlahKadaluwarsa = Convert.ToInt32(new SqlCommand("SELECT COUNT(*) FROM Stok WHERE Status='Kadaluwarsa'", conn).ExecuteScalar());
+
+                conn.Close();
+
+                chartStok.Series.Clear();
+                chartStok.ChartAreas.Clear();
+                chartStok.Titles.Clear();
+
+                chartStok.Titles.Add("Status Stok Bahan");
+                chartStok.Titles[0].Font = new Font("Arial", 11, FontStyle.Bold);
+
+                ChartArea chartArea = new ChartArea();
+                chartArea.AxisX.Title = "Status";
+                chartArea.AxisY.Title = "Jumlah";
+                chartArea.AxisY.Minimum = 0;
+                chartArea.AxisY.Interval = 1;
+                chartStok.ChartAreas.Add(chartArea);
+
+                Series series = new Series("Jumlah Stok");
+                series.ChartType = SeriesChartType.Column;
+                series.IsValueShownAsLabel = true;
+                series.Font = new Font("Arial", 9, FontStyle.Bold);
+
+                series.Points.AddXY("Aman", jumlahAman);
+                series.Points[0].Color = Color.Green;
+
+                series.Points.AddXY("Hampir Kadaluwarsa", jumlahHampir);
+                series.Points[1].Color = Color.Orange;
+
+                series.Points.AddXY("Kadaluwarsa", jumlahKadaluwarsa);
+                series.Points[2].Color = Color.Red;
+
+                chartStok.Series.Add(series);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error load chart: " + ex.Message);
+            }
         }
     }
 }

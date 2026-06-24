@@ -36,6 +36,7 @@
             this.btnHapusLaporan = new System.Windows.Forms.Button();
             this.dgvStokBermasalah = new System.Windows.Forms.DataGridView();
             this.dgvLaporan = new System.Windows.Forms.DataGridView();
+            this.btnCetak = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStokBermasalah)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLaporan)).BeginInit();
             this.SuspendLayout();
@@ -115,11 +116,22 @@
             this.dgvLaporan.Size = new System.Drawing.Size(564, 471);
             this.dgvLaporan.TabIndex = 7;
             // 
+            // btnCetak
+            // 
+            this.btnCetak.Location = new System.Drawing.Point(533, 34);
+            this.btnCetak.Name = "btnCetak";
+            this.btnCetak.Size = new System.Drawing.Size(134, 37);
+            this.btnCetak.TabIndex = 8;
+            this.btnCetak.Text = "Cetak Laporan";
+            this.btnCetak.UseVisualStyleBackColor = true;
+            this.btnCetak.Click += new System.EventHandler(this.btnCetak_Click);
+            // 
             // FormLaporan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1222, 618);
+            this.Controls.Add(this.btnCetak);
             this.Controls.Add(this.dgvLaporan);
             this.Controls.Add(this.dgvStokBermasalah);
             this.Controls.Add(this.btnHapusLaporan);
@@ -148,5 +160,6 @@
         private System.Windows.Forms.Button btnHapusLaporan;
         private System.Windows.Forms.DataGridView dgvStokBermasalah;
         private System.Windows.Forms.DataGridView dgvLaporan;
+        private System.Windows.Forms.Button btnCetak;
     }
 }

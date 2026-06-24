@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Tim4_Bakeexpire
 {
@@ -7,7 +8,8 @@ namespace Tim4_Bakeexpire
     {
         public static SqlConnection GetConnection()
         {
-            return new SqlConnection("Data Source=MYBOOKHYPE\\AKMALSQL;Initial Catalog=BakeExpireDB;Integrated Security=True");
+            string connStr = ConfigurationManager.ConnectionStrings["DbBakeExpire"].ConnectionString;
+            return new SqlConnection(connStr);
         }
     }
 }
