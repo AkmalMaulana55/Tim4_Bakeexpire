@@ -466,7 +466,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:TRUE"
+            "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -527,7 +527,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Tim4_BakeExpire_Setup"
         "ProductCode" = "8:{69607330-CE37-4E1C-872B-87CF1F5B488F}"
-        "PackageCode" = "8:{9B10D394-2069-44D1-8AC9-E81B5B88F3FE}"
+        "PackageCode" = "8:{E0B501C1-7540-4DE5-86D4-1C3F81DCDF01}"
         "UpgradeCode" = "8:{44A0A6A8-2840-4F22-A8F1-E039EE966840}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -548,7 +548,7 @@
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:0"
+        "TargetPlatform" = "3:1"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
@@ -1048,7 +1048,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_6977DF2FBF5244FCB7F26C612C203280"
             {
-            "SourcePath" = "8:..\\Tim4_Bakeexpire\\obj\\x86\\Release\\Tim4_Bakeexpire.exe"
+            "SourcePath" = "8:..\\Tim4_Bakeexpire\\obj\\x64\\Release\\Tim4_Bakeexpire.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B7E2B5D7ED7749CA87C5B9B31E1814C7"
